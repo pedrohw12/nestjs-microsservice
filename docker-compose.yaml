@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  app: 
+    build: . # path of docker file
+    container_name: micro-services-video-ts-app
+    volumes:
+      - .:/home/node/app # get all the app and save on this path

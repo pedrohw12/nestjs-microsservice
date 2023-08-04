@@ -1,0 +1,26 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "Video catalog admin",
+  "main": "index.js",
+  "scripts": {
+    "ts-node": "ts-node",
+    "tsc": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pedrohw12/nestjs-microsservice.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pedrohw12/nestjs-microsservice/issues"
+  },
+  "homepage": "https://github.com/pedrohw12/nestjs-microsservice#readme",
+  "devDependencies": {
+    "@types/node": "14.14.31",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  }
+}

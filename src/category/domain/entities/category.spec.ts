@@ -1,3 +1,4 @@
+import UniqueEntityId from "../../../@seedwork/domain/unique-entity-id.vo"
 import { Category } from "./category";
 import { omit } from "lodash";
 
@@ -58,6 +59,73 @@ describe("Category Unit Test", () => {
     expect(category.props).toMatchObject({
       name: "Movie",
       created_at,
+    });
+  });
+
+  test("Getter of name field", () => {
+    const category = new Category({ name: "Movie" });
+
+    expect(category.name).toBe("Movie");
+  });
+
+  test("Getter and setter of description field", () => {
+    let category = new Category({ name: "Movie" });
+
+    expect(category.description).toBeNull();
+
+    category = new Category({ name: "Movie", description: "desc" });
+
+    expect(category.description).toBe("desc");
+
+    category = new Category({ name: "Movie" });
+    category["description"] = "other desc";
+    expect(category.description).toBe("other desc");
+
+    category["description"] = undefined;
+    expect(category.description).toBeNull();
+
+    category["description"] = null;
+    expect(category.description).toBeNull();
+  });
+
+  test("Getter and Setter of is_active field", () => {
+    let category = new Category({ name: "Movie" });
+
+    expect(category.is_active).toBeTruthy();
+
+    category = new Category({ name: "Movie", is_active: true });
+
+    expect(category.is_active).toBeTruthy();
+
+    category = new Category({ name: "Movie", is_active: false });
+
+    expect(category.is_active).toBeFalsy();
+  });
+
+  test("Getter of created_at field", () => {
+    let category = new Category({ name: "Movie" });
+
+    expect(category.created_at).toBeInstanceOf(Date);
+
+    const created_at = new Date();
+    category = new Category({ name: "Movie", created_at });
+
+    expect(category.created_at).toBe(created_at);
+  });
+
+  test("ID field", () => {
+    const data = [
+      { props: { name: "Movie" } },
+      { props: { name: "Movie" }, id: null },
+      { props: { name: "Movie" }, id: undefined },
+      { props: { name: "Movie" }, id: new UniqueEntityId() },
+    ];
+
+    data.forEach((i) => {
+      const category = new Category(i.props, i.id as any);
+
+      expect(category.id).not.toBeNull();
+      expect(category.id).toBeInstanceOf(UniqueEntityId);
     });
   });
 });
